@@ -1,0 +1,227 @@
+.tab_container {
+  margin: 52px auto;
+  width: 80%;
+  max-width: 650px;
+  position: relative;
+  border: 1px solid #4479dd;
+  border-radius: 5px;
+  padding: 10px;
+  * {
+    text-decoration: none;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 90%;
+    margin: 35px auto;
+  }
+
+  .opened {
+    height: 330px;
+    .container__content {
+      height: inherit;
+      overflow: auto;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+      height: 450px;
+    }
+  }
+
+  .name-section {
+    display: flex;
+    gap: 3%;
+    justify-content: center;
+    margin-bottom: 10px;
+    .offer-name {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      text-align: center;
+      width: 45%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .tab_sub_container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 3%;
+
+    .tab-container_img {
+      width: 45%;
+      border-radius: 5px;
+      @media only screen and (max-width: 600px) {
+        min-width: 150px;
+        height: 150px;
+      }
+    }
+
+    .tab-container_info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 15px;
+
+      .info__buy {
+        display: flex;
+        gap: 5%;
+        align-items: center;
+        justify-content: center;
+        @media only screen and (max-width: 768px) {
+          justify-content: space-between;
+        }
+
+        .buy__info {
+          font-size: 15px;
+          text-align: center;
+
+          .info__link {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 210px;
+
+            @media only screen and (max-width: 800px) {
+              max-width: 160px;
+            }
+            @media only screen and (max-width: 610px) {
+              max-width: 140px;
+            }
+            @media only screen and (max-width: 610px) {
+              max-width: 100px;
+            }
+            @media only screen and (max-width: 405px) {
+              max-width: 80px;
+            }
+          }
+
+          @media only screen and (max-width: 768px) {
+            font-size: 12px;
+          }
+
+          .info__price {
+            margin-top: 5px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  .tab_item_rate {
+    margin: auto;
+    color: #000;
+    background-color: #fff1dd;
+    border: 1px solid #fbc92e;
+    width: 70px;
+    height: 23px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .tab_item_rate_text {
+      font-size: 13px;
+      font-weight: 700;
+      margin-left: 3px;
+      span {
+        font-size: 12px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .tab_sub-number {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    left: -8px;
+    top: -8px;
+    border: 1px solid #4479dd;
+    background: #4479dd;
+    color: #fff;
+    font-size: 10px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .promo-info {
+    display: flex;
+    width: 100%;
+    margin-top: 30px;
+    height: 65px;
+    font-size: 10px;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #e9f1fe;
+    color: #222222;
+    font-size: 20px;
+    margin-bottom: 10px;
+
+    @media only screen and (max-width: 768px) {
+      height: 45px;
+      font-size: 15px;
+    }
+  }
+
+  .buy-now-btn {
+    width: 100px;
+    flex: none;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4479dd;
+    text-decoration: none !important;
+    box-shadow: inset 0 -4px 2px rgba(0, 0, 0, 0.2);
+    border: #4479dd;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+    @media only screen and (max-width: 768px) {
+      font-size: 9px;
+      height: 40px;
+      width: 30%;
+      max-width: 90px;
+      flex: auto;
+    }
+  }
+
+  .tab_show {
+    background-color: #e9f1fe;
+    border: 1px solid #4479dd;
+    border-radius: 20px;
+    width: 120px;
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    font-weight: normal;
+    position: absolute;
+    left: calc(50% - 60px);
+    bottom: -13px;
+  }
+}

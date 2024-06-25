@@ -1,0 +1,54 @@
+.nav-bar-toggle-container {
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #4479dd;
+  background-color: #e9f1fe;
+  width: 90%;
+  max-width: 1010px;
+  margin: 3% auto;
+  border-radius: 20px;
+  height: 45px;
+  box-shadow: inset 0px 0px 5px 0px rgba(68, 121, 221, 0.2);
+  display: flex;
+  padding: 2px;
+}
+
+.toggle-option-1 {
+  width: 100%;
+  height: inherit;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1948a0;
+  font-size: 13px;
+  transition: 100ms;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+}
+
+.active {
+  display: flex;
+  flex-direction: column;
+  transition: 200ms;
+  font-size: 13px;
+  font-weight: bold;
+  width: 100%;
+  height: 38px;
+  background-color: #4479dd;
+  color: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-toggle {
+  height: auto;
+  .toggle-option-1,
+  .active {
+    height: 40px;
+    font-size: 12px;
+  }
+}
