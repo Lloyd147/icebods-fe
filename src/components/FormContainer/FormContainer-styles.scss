@@ -11,6 +11,40 @@
     box-sizing: border-box;
   }
 }
+
+.rating {
+  width: 60px;
+}
+
+.add-new-section-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 20px 0px;
+  cursor: pointer;
+}
+
+.logo-icon {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.first-row1 {
+  display: flex;
+  width: 100%;
+  gap: 3%;
+  align-items: baseline;
+}
+
+.header-form {
+  font-size: 17px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: -0.9px;
+  margin-bottom: 20px;
+}
+
 .form-header {
   margin-top: 30px;
   display: flex;
@@ -42,6 +76,14 @@
 .form-group {
   width: 50%;
   margin-bottom: 20px;
+}
+
+.form-group1 {
+  width: 80%;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .small-input {
@@ -203,6 +245,23 @@ button {
       width: 30%;
     }
   }
+
+  .inputs__group1 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 25px;
+    .quill-input {
+      max-width: 372px;
+    }
+
+    .group__input1 {
+      width: 48%;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+  }
 }
 
 .bonus-table {
@@ -231,4 +290,44 @@ button {
   th {
     background-color: #f2f2f2;
   }
+}
+
+.accordian {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+.accordian-title {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+}
+
+.accordian-expand {
+  display: flex;
+  gap: 18px;
+}
+
+.accordian-text-area {
+  width: 70%;
+  height: 150px;
+  margin: 10px 0;
+}
+
+.other-text {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.delete {
+  cursor: pointer;
+  width: 20px;
+}
+
+.logo-footer {
+  width: 61px;
 }

@@ -1,18 +1,26 @@
-import { Offer } from '@/components/TabCards';
-import { BetslipItem } from '@/redux/features/betslipSlice';
-import { Bonus, BonusInfo } from '@/redux/features/bonusSlice';
-import { Filters } from '@/redux/features/fixturesSlice';
-import { Fixture, Odds, OddsProduct, OneX, bookie } from '@/types/commonTypes';
+import { Offer } from "@/components/TabCards";
+import { BetslipItem } from "@/redux/features/betslipSlice";
+import { Bonus, BonusInfo } from "@/redux/features/bonusSlice";
+import { Filters } from "@/redux/features/fixturesSlice";
+import { Fixture, Odds, OddsProduct, OneX, bookie } from "@/types/commonTypes";
 
 export const checkHTTPProtocol = (uri: string): string => {
-  if (uri.startsWith('https://') || uri.startsWith('http://')) return uri;
-  else return 'https://' + uri;
+  if (uri.startsWith("https://") || uri.startsWith("http://")) return uri;
+  else return "https://" + uri;
 };
 
 export function getCurrentWeekDays() {
   const today = new Date();
-  const dayNames = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
-  const fullDayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const dayNames = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
+  const fullDayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
   const weekDays = [];
 
@@ -20,16 +28,22 @@ export function getCurrentWeekDays() {
     const day = new Date(today);
     day.setDate(today.getDate() + i);
 
-    const formattedDate = `${String(day.getDate()).padStart(2, '0')}.${String(day.getMonth() + 1).padStart(2, '0')}`;
+    const formattedDate = `${String(day.getDate()).padStart(2, "0")}.${String(
+      day.getMonth() + 1
+    ).padStart(2, "0")}`;
 
     weekDays.push({
-      name: i === 0 ? 'TODAY' : dayNames[day.getDay()],
+      name: i === 0 ? "TODAY" : dayNames[day.getDay()],
       fullName: fullDayNames[day.getDay()],
-      date: formattedDate
+      date: formattedDate,
     });
   }
 
   return weekDays;
+}
+
+export function findItemByKey(array: any, key: any, value: any) {
+  return array.find((item: any) => item[key] === value);
 }
 
 export function getDateAndTime(dateString: string) {
@@ -37,26 +51,26 @@ export function getDateAndTime(dateString: string) {
 
   const localTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-  const formattedDate = date.toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: 'short',
-    timeZone: localTimeZone
+  const formattedDate = date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    timeZone: localTimeZone,
   });
 
-  let hours = date.getHours().toString().padStart(2, '0');
-  let minutes = date.getMinutes().toString().padStart(2, '0');
+  let hours = date.getHours().toString().padStart(2, "0");
+  let minutes = date.getMinutes().toString().padStart(2, "0");
   const formattedTime = `${hours}:${minutes}`;
 
   return {
     date: formattedDate,
-    time: formattedTime
+    time: formattedTime,
   };
 }
 
 export function getDateForFilters(dateString: string) {
   const date = new Date(dateString);
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
   return `${day}.${month}`;
 }
 
@@ -68,12 +82,13 @@ export function findBestBookie(odds: Odds) {
 
     const oneXData: OneX = data?.oneX;
 
-    const totalOdds: number = oneXData.homeWin + oneXData.draw + oneXData.awayWin;
+    const totalOdds: number =
+      oneXData.homeWin + oneXData.draw + oneXData.awayWin;
 
     if (!bestBookie || totalOdds > bestBookie.totalOdds) {
       bestBookie = {
         bookieName,
-        totalOdds
+        totalOdds,
       };
     }
   }
@@ -85,7 +100,7 @@ export function filterFixtures(fixtures: Fixture[], filters: Filters) {
   let filteredFixtures = fixtures
     .filter((f) => getDateForFilters(f.eventDateTime) === filters.day.date)
     .filter((f) => {
-      if (filters.league === '*') return f;
+      if (filters.league === "*") return f;
       return f.league === filters.league;
     })
     .sort((a, b) => {
@@ -98,7 +113,10 @@ export function filterFixtures(fixtures: Fixture[], filters: Filters) {
       return 0;
     });
 
-  if (filters?.sortBy.toLocaleLowerCase() === 'odds') filteredFixtures.sort((a, b) => a.bestCalculatedOdds.oddSum - b.bestCalculatedOdds.oddSum);
+  if (filters?.sortBy.toLocaleLowerCase() === "odds")
+    filteredFixtures.sort(
+      (a, b) => a.bestCalculatedOdds.oddSum - b.bestCalculatedOdds.oddSum
+    );
 
   return filteredFixtures;
 }
@@ -107,7 +125,7 @@ export function calculateTotalOddsPerBookie(items: BetslipItem[]) {
   let oddsProduct: OddsProduct = {
     betWay: 1,
     betGoodWin: 1,
-    betUk: 1
+    betUk: 1,
   };
 
   items.forEach((item) => {
@@ -115,7 +133,8 @@ export function calculateTotalOddsPerBookie(items: BetslipItem[]) {
 
     for (const bookie in item.odds) {
       if (item.odds.hasOwnProperty(bookie)) {
-        const odds = item.odds[bookie as keyof Odds].oneX[selectedType as keyof OneX];
+        const odds =
+          item.odds[bookie as keyof Odds].oneX[selectedType as keyof OneX];
         oddsProduct[bookie as keyof OddsProduct] *= odds;
       }
     }
@@ -130,7 +149,7 @@ export function getValueWithBonus(value: number, bonus: number) {
 
 export function getBestBookie(odds: OddsProduct) {
   let maxOdds = 0;
-  let bookieWithHighestOdds = '';
+  let bookieWithHighestOdds = "";
 
   for (const bookie in odds) {
     if (odds[bookie as keyof OddsProduct] > maxOdds) {
@@ -144,7 +163,7 @@ export function getBestBookie(odds: OddsProduct) {
 
 export function clearOldBetslip() {
   const today = new Date().toLocaleDateString();
-  const storedDate = localStorage.getItem('betslipTimestamp');
+  const storedDate = localStorage.getItem("betslipTimestamp");
 
   if (storedDate !== today) localStorage.clear();
 }
@@ -152,25 +171,28 @@ export function clearOldBetslip() {
 export function formatDateForOddssRow(dateString: string) {
   const date = new Date(dateString);
 
-  const day = String(date.getUTCDate()).padStart(2, '0');
-  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
   const year = date.getUTCFullYear();
-  const hour = String(date.getUTCHours()).padStart(2, '0');
-  const minute = String(date.getUTCMinutes()).padStart(2, '0');
+  const hour = String(date.getUTCHours()).padStart(2, "0");
+  const minute = String(date.getUTCMinutes()).padStart(2, "0");
 
   return `${day}/${month}/${year} @ ${hour}:${minute}`;
 }
 
-export function getLocalDate(dateString: string = '') {
+export function getLocalDate(dateString: string = "") {
   if (dateString) {
     const date = new Date(dateString);
     const localDate = date?.toLocaleString();
 
-    const [datePart, timePart] = localDate?.split(', ');
-    const [day, month, year] = datePart?.split('/');
-    const [hour, minute] = timePart?.split(':');
+    const [datePart, timePart] = localDate?.split(", ");
+    const [day, month, year] = datePart?.split("/");
+    const [hour, minute] = timePart?.split(":");
 
-    return `${year}-${month?.padStart(2, '0')}-${day?.padStart(2, '0')}T${hour?.padStart(2, '0')}:${minute?.padStart(2, '0')}`;
+    return `${year}-${month?.padStart(2, "0")}-${day?.padStart(
+      2,
+      "0"
+    )}T${hour?.padStart(2, "0")}:${minute?.padStart(2, "0")}`;
   }
 }
 
@@ -179,10 +201,10 @@ export function getLeagueOptions(fixtures: Fixture[]) {
 
   const options = Array.from(uniqueLeagues).map((league) => ({
     label: league,
-    value: league
+    value: league,
   }));
 
-  options.unshift({ label: 'All', value: '*' });
+  options.unshift({ label: "All", value: "*" });
 
   return options;
 }
@@ -205,14 +227,17 @@ export function getOddsInitialValues(bookieNames: string[]) {
   bookieNames.forEach((item) => {
     result[item] = {
       oneX: { homeWin: 0, draw: 0, awayWin: 0 },
-      suspended: false
+      suspended: false,
     };
   });
 
   return result;
 }
 
-export function getBestOddsTotal(totalOddsPerBookie: OddsProduct, bonusInfo: BonusInfo) {
+export function getBestOddsTotal(
+  totalOddsPerBookie: OddsProduct,
+  bonusInfo: BonusInfo
+) {
   let bestTotalOdds = 0;
 
   Object.keys(totalOddsPerBookie).map((bookie) => {
