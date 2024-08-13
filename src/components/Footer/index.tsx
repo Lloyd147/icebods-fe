@@ -62,7 +62,7 @@ function Footer({ data }: { data: any }) {
           </div>
         ))}
 
-        <div className="powered">POWERED BY BONUS9JA</div>
+        <div className="powered">POWERED BY ICEBODS</div>
       </div>
     </>
   );
