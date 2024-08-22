@@ -63,7 +63,7 @@ const Blog = () => {
     const blogs = JSON.parse(localStorage.getItem("blogs")!);
   }, []);
 
-  const item = findItemByKey(footers, "name", "Odds footer");
+  const item = findItemByKey(footers, "name", "Blog footer");
   const itemAllFooters = findItemByKey(footers, "name", "Set All Footers");
 
   return (
